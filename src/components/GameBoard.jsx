@@ -1,27 +1,15 @@
-const initialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
-export function GameBoard({ playerSymbol, turns }) {
-  const gameBoard = [...initialGameBoard.map((arr) => [...arr])];
-
-  for (const turn of turns) {
-    const { square, player } = turn;
-    const { row, col } = square;
-
-    gameBoard[row][col] = player;
-}
-
+export function GameBoard({ playerSymbol, board }) {
   return (
     <ol id="game-board">
-      {gameBoard.map((row, rowIndex) => (
+      {board.map((row, rowIndex) => (
         <li key={rowIndex}>
           <ol>
             {row.map((symbol, symbolIndex) => (
               <li key={symbolIndex}>
-                <button onClick={()=>playerSymbol(rowIndex,symbolIndex)}>
+                <button
+                  onClick={() => playerSymbol(rowIndex, symbolIndex)}
+                  disabled={symbol !== null}
+                >
                   {symbol}
                 </button>
               </li>
